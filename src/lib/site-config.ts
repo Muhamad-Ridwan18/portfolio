@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Muhamad Ridwan | Senior Software Engineer",
   description:
     "Personal portfolio of Muhamad Ridwan, Senior Software Engineer specializing in Laravel, Golang, React Native, backend development, healthcare systems, and scalable web applications.",
-  url: "https://muhamadridwan.dev",
+  url: "https://portpolio-two-sable.vercel.app",
   email: "muhamad.ridwan@example.com",
   github: "https://github.com/Muhamad-Ridwan18",
   linkedin: "https://linkedin.com/in/muhamadridwan",
