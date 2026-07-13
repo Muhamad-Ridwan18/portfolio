@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+  <rect width="1200" height="750" fill="#18181b"/>
+  <rect width="1200" height="56" fill="#09090b"/>
+  <circle cx="28" cy="28" r="6" fill="#ef4444" opacity="0.8"/>
+  <circle cx="52" cy="28" r="6" fill="#eab308" opacity="0.8"/>
+  <circle cx="76" cy="28" r="6" fill="#22c55e" opacity="0.8"/>
+  <text x="100" y="34" fill="#71717a" font-family="monospace" font-size="13">baytgo/marketplace.tsx</text>
+  <text x="80" y="110" fill="#fafafa" font-family="sans-serif" font-size="28" font-weight="bold">BaytGo</text>
+  <text x="80" y="140" fill="#a1a1aa" font-family="sans-serif" font-size="16">Muthowif marketplace</text>
+  
+      <rect x="40" y="80" width="200" height="600" rx="16" fill="#27272a"/>
+      <rect x="280" y="120" width="260" height="200" rx="16" fill="#27272a"/>
+      <rect x="560" y="120" width="260" height="200" rx="16" fill="#27272a"/>
+      <rect x="840" y="120" width="260" height="200" rx="16" fill="#27272a"/>
+      <rect x="300" y="150" width="80" height="80" rx="40" fill="#8B5CF6" opacity="0.3"/>
+</svg>

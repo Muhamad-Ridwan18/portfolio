@@ -98,6 +98,13 @@ export interface JourneyStep {
   label: string;
 }
 
+export interface ProjectImage {
+  id: string;
+  src: string;
+  alt: string;
+  caption: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -109,6 +116,8 @@ export interface Project {
   gradient: string;
   accent: string;
   initials?: string;
+  images?: ProjectImage[];
+  url?: string;
 }
 
 export interface TechCategory {

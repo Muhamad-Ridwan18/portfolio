@@ -1,9 +1,11 @@
+import { attachProjectImages } from "@/data/project-images";
 import { portfolio } from "@/data/portfolio";
 import type {
   ContactChannel,
   ImpactStat,
   Portfolio,
   Project,
+  ProjectImage,
   SectionConfig,
 } from "@/types/portfolio";
 
@@ -13,7 +15,7 @@ export interface ResolvedContactChannel extends ContactChannel {
 }
 
 export interface ResolvedPortfolio extends Omit<Portfolio, "contact" | "projects" | "impact" | "profile"> {
-  projects: Project[];
+  projects: (Project & { images: ProjectImage[] })[];
   impact: ImpactStat[];
   profile: Portfolio["profile"] & {
     ctas: Portfolio["profile"]["ctas"];
@@ -75,11 +77,13 @@ export function getProjectInitials(name: string): string {
     .toUpperCase();
 }
 
-function enrichProjects(projects: Project[]): Project[] {
-  return projects.map((project) => ({
-    ...project,
-    initials: project.initials ?? getProjectInitials(project.name),
-  }));
+function enrichProjects(projects: Project[]): (Project & { images: ProjectImage[] })[] {
+  return attachProjectImages(
+    projects.map((project) => ({
+      ...project,
+      initials: project.initials ?? getProjectInitials(project.name),
+    }))
+  );
 }
 
 function resolveImpactStats(
