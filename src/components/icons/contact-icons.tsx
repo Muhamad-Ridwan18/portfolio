@@ -36,6 +36,12 @@ const icons: Record<ContactIcon, React.ReactNode> = {
       <path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   ),
+  calendar: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
 };
 
 export function ContactIcon({ type }: { type: ContactIcon }) {

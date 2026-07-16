@@ -1,11 +1,8 @@
-import { attachProjectImages } from "@/data/project-images";
 import { portfolio } from "@/data/portfolio";
 import type {
   ContactChannel,
-  ImpactStat,
   Portfolio,
   Project,
-  ProjectImage,
   SectionConfig,
 } from "@/types/portfolio";
 
@@ -14,12 +11,12 @@ export interface ResolvedContactChannel extends ContactChannel {
   description: string;
 }
 
-export interface ResolvedPortfolio extends Omit<Portfolio, "contact" | "projects" | "impact" | "profile"> {
-  projects: (Project & { images: ProjectImage[] })[];
-  impact: ImpactStat[];
+export interface ResolvedPortfolio
+  extends Omit<Portfolio, "contact" | "profile"> {
   profile: Portfolio["profile"] & {
-    ctas: Portfolio["profile"]["ctas"];
-    socialLinks: (Portfolio["profile"]["socialLinks"][number] & { href: string })[];
+    socialLinks: (Portfolio["profile"]["socialLinks"][number] & {
+      href: string;
+    })[];
   };
   contact: Omit<Portfolio["contact"], "channels"> & {
     channels: ResolvedContactChannel[];
@@ -29,8 +26,6 @@ export interface ResolvedPortfolio extends Omit<Portfolio, "contact" | "projects
 export function getPortfolio(): ResolvedPortfolio {
   return {
     ...portfolio,
-    projects: enrichProjects(portfolio.projects),
-    impact: resolveImpactStats(portfolio.impact, portfolio.projects),
     contact: {
       ...portfolio.contact,
       channels: portfolio.contact.channels.map((channel) =>
@@ -70,51 +65,16 @@ export function getSectionConfig(
   return getPortfolio().sections.find((section) => section.id === id);
 }
 
-export function getSectionNumber(id: SectionConfig["id"]): string | undefined {
-  const numbers: Partial<Record<SectionConfig["id"], string>> = {
-    about: "01",
-    "tech-stack": "02",
-    projects: "03",
-    experience: "04",
-    skills: "05",
-    impact: "06",
-    journey: "07",
-    contact: "08",
-  };
-  return numbers[id];
+export function getProjectById(id: string): Project | undefined {
+  return getPortfolio().projects.find((project) => project.id === id);
 }
 
-export function getProjectInitials(name: string): string {
-  return name
-    .split(/\s+/)
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+export function getFeaturedProjects(): Project[] {
+  return getPortfolio().projects.filter((p) => p.featured);
 }
 
-function enrichProjects(projects: Project[]): (Project & { images: ProjectImage[] })[] {
-  return attachProjectImages(
-    projects.map((project) => ({
-      ...project,
-      initials: project.initials ?? getProjectInitials(project.name),
-    }))
-  );
-}
-
-function resolveImpactStats(
-  stats: ImpactStat[],
-  projects: Project[]
-): ImpactStat[] {
-  return stats.map((stat) => {
-    if (!stat.computed) return stat;
-
-    if (stat.id === "projects") {
-      return { ...stat, value: projects.length };
-    }
-
-    return stat;
-  });
+export function getSecondaryProjects(): Project[] {
+  return getPortfolio().projects.filter((p) => !p.featured);
 }
 
 function resolveContactChannel(
@@ -126,6 +86,7 @@ function resolveContactChannel(
     github: data.social.github,
     linkedin: data.social.linkedin,
     instagram: data.social.instagram,
+    calendar: `mailto:${data.site.email}?subject=Schedule%20a%20call`,
   };
 
   return {
@@ -146,52 +107,6 @@ function resolveSocialHref(
   if (id === "instagram") return social.instagram;
   if (id === "email") return `mailto:${site.email}`;
   return "#";
-}
-
-export interface CodeLine {
-  indent: number;
-  content: string;
-  color: string;
-}
-
-export function buildCodeLines(): CodeLine[] {
-  const { profile } = getPortfolio();
-  const { codeSnippet, displayName, role } = profile;
-  const skills = codeSnippet.skills;
-  const half = Math.ceil(skills.length / 2);
-  const line1 = skills
-    .slice(0, half)
-    .map((s) => `"${s}"`)
-    .join(", ");
-  const line2 = skills
-    .slice(half)
-    .map((s) => `"${s}"`)
-    .join(", ");
-
-  const lines: CodeLine[] = [
-    { indent: 0, content: `const ${codeSnippet.variableName} = {`, color: "text-sky-300" },
-    { indent: 1, content: `name: "${displayName}",`, color: "text-slate-100" },
-    { indent: 1, content: `role: "${role}",`, color: "text-slate-100" },
-    { indent: 1, content: "skills: [", color: "text-slate-100" },
-    { indent: 2, content: `${line1}${skills.length > half ? "," : ""}`, color: "text-emerald-400" },
-  ];
-
-  if (line2) {
-    lines.push({ indent: 2, content: line2, color: "text-emerald-400" });
-  }
-
-  lines.push(
-    { indent: 1, content: "],", color: "text-slate-100" },
-    { indent: 1, content: codeSnippet.buildLine, color: "text-green-400" },
-    { indent: 0, content: "};", color: "text-sky-300" }
-  );
-
-  return lines;
-}
-
-export function getDefaultExperienceId(): string | null {
-  const item = getPortfolio().experience.find((exp) => exp.defaultOpen);
-  return item?.id ?? getPortfolio().experience.at(-1)?.id ?? null;
 }
 
 export const siteConfig = {

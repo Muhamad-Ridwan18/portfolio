@@ -1,18 +1,20 @@
 export type SectionId =
   | "hero"
-  | "marquee"
+  | "tech-logos"
+  | "projects"
   | "about"
   | "experience"
-  | "projects"
+  | "writing"
+  | "contact"
+  | "marquee"
   | "tech-stack"
   | "skills"
   | "impact"
   | "journey"
   | "how-i-build"
-  | "spotlight"
-  | "contact";
+  | "spotlight";
 
-export type ContactIcon = "email" | "linkedin" | "github" | "instagram" | "twitter" | "website";
+export type ContactIcon = "email" | "linkedin" | "github" | "instagram" | "twitter" | "website" | "calendar";
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "dark";
 
 export interface SectionHeading {
@@ -53,24 +55,17 @@ export interface Profile {
   firstName: string;
   lastName?: string;
   displayName: string;
+  shortName: string;
   role: string;
-  roleHighlight?: string;
-  focusAreas?: string;
-  headline: string;
-  tagline: string;
   greeting: string;
+  headline: string;
+  headlineAccent: string;
+  tagline: string;
+  portrait: string;
   available: boolean;
   availabilityText: string;
-  codeSnippet: {
-    fileName: string;
-    variableName: string;
-    skills: string[];
-    buildLine: string;
-  };
   socialLinks: SocialLink[];
   ctas: HeroCta[];
-  rotatingPhrases: string[];
-  stats: { label: string; value: string; icon?: string }[];
 }
 
 export interface SectionConfig {
@@ -81,14 +76,9 @@ export interface SectionConfig {
   className?: string;
 }
 
-export interface AboutHighlight {
-  label: string;
-  value: string;
-}
-
 export interface AboutContent {
   paragraphs: string[];
-  highlights: AboutHighlight[];
+  highlights: { label: string; value: string }[];
 }
 
 export interface ExperienceItem {
@@ -101,29 +91,22 @@ export interface ExperienceItem {
   defaultOpen?: boolean;
 }
 
-export interface JourneyStep {
-  year: string;
-  label: string;
-  description: string;
-}
-
-export interface ProcessStep {
-  step: number;
-  title: string;
-}
-
-export interface LaunchImpact {
-  value: number;
-  suffix: string;
-  label: string;
-  domains: string[];
-}
-
 export interface ProjectImage {
   id: string;
   src: string;
   alt: string;
   caption: string;
+}
+
+export interface CaseStudyStat {
+  value: string;
+  label: string;
+}
+
+export interface CaseStudyStep {
+  step: string;
+  title: string;
+  description: string;
 }
 
 export interface Project {
@@ -135,27 +118,31 @@ export interface Project {
   stack: string[];
   contributions: string[];
   highlights?: string[];
-  gradient: string;
   accent: string;
   featured?: boolean;
-  useMockup?: boolean;
-  initials?: string;
+  coverImage?: string;
+  deviceType?: "phones" | "laptop" | "tablet";
+  caseStudyHref?: string;
+  stats?: CaseStudyStat[];
+  about?: string;
+  howItWorks?: CaseStudyStep[];
+  caseHighlights?: string[];
   images?: ProjectImage[];
   url?: string;
 }
 
-export interface TechCategory {
-  category: string;
-  color: string;
-  items: string[];
+export interface TechLogo {
+  name: string;
+  icon: string;
 }
 
-export interface ImpactStat {
+export interface WritingPost {
   id: string;
-  label: string;
-  value: number;
-  suffix?: string;
-  computed?: boolean;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  href?: string;
 }
 
 export interface ContactChannel {
@@ -177,13 +164,8 @@ export interface FooterContent {
   tagline: string;
   builtWith: string[];
   madeBy: string;
-}
-
-export interface SpotlightContent {
-  title: string;
-  subtitle: string;
-  ctaLabel: string;
-  ctaHref: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
 }
 
 export interface Portfolio {
@@ -192,17 +174,11 @@ export interface Portfolio {
   sections: SectionConfig[];
   about: AboutContent;
   experience: ExperienceItem[];
-  journey: JourneyStep[];
   projects: Project[];
-  techStack: TechCategory[];
-  skills: string[];
-  impact: ImpactStat[];
-  launchImpact: LaunchImpact;
-  process: ProcessStep[];
+  techLogos: TechLogo[];
+  writing: WritingPost[];
   contact: ContactContent;
   footer: FooterContent;
-  spotlight: SpotlightContent;
-  marquee: string[];
   social: {
     github: string;
     linkedin: string;

@@ -1,28 +1,29 @@
 import type { SectionId } from "@/types/portfolio";
 import { Hero } from "./hero";
+import { TechLogos } from "./tech-logos";
+import { Projects } from "./projects";
 import { About } from "./about";
 import { Experience } from "./experience";
-import { Projects } from "./projects";
-import { TechStack } from "./tech-stack";
-import { Skills } from "./skills";
-import { EngineeringImpact } from "./engineering-impact";
-import { Journey } from "./journey";
-import { HowIBuild } from "./how-i-build";
-import { TechMarquee } from "./tech-marquee";
-import { Spotlight } from "./spotlight";
+import { Writing } from "./writing";
 import { Contact } from "./contact";
+
+function DisabledSection() {
+  return null;
+}
 
 export const sectionRegistry: Record<SectionId, React.ComponentType> = {
   hero: Hero,
-  marquee: TechMarquee,
+  "tech-logos": TechLogos,
+  projects: Projects,
   about: About,
   experience: Experience,
-  projects: Projects,
-  "tech-stack": TechStack,
-  skills: Skills,
-  impact: EngineeringImpact,
-  journey: Journey,
-  "how-i-build": HowIBuild,
-  spotlight: Spotlight,
+  writing: Writing,
   contact: Contact,
+  marquee: DisabledSection,
+  "tech-stack": DisabledSection,
+  skills: DisabledSection,
+  impact: DisabledSection,
+  journey: DisabledSection,
+  "how-i-build": DisabledSection,
+  spotlight: DisabledSection,
 };

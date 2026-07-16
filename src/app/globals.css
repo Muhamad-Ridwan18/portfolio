@@ -1,34 +1,24 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
 
 @theme {
-  --color-background: #fafafa;
+  --color-background: #ffffff;
   --color-surface: #ffffff;
-  --color-surface-elevated: #f5f5f5;
-  --color-primary: #2563eb;
-  --color-secondary: #3b82f6;
-  --color-success: #2563eb;
+  --color-surface-muted: #f7f7f5;
+  --color-primary: #164e33;
+  --color-primary-soft: #1a5c3a;
+  --color-ink: #111111;
   --color-text-primary: #111111;
-  --color-text-secondary: #666666;
-  --color-text-muted: #999999;
+  --color-text-secondary: #5c5c5c;
+  --color-text-muted: #8a8a8a;
   --color-border: rgba(17, 17, 17, 0.08);
-  --color-border-hover: rgba(17, 17, 17, 0.14);
+  --color-border-hover: rgba(17, 17, 17, 0.16);
 
-  --font-heading: var(--font-geist-sans);
+  --font-heading: var(--font-inter);
   --font-body: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
 }
 
 html {
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -42,7 +32,7 @@ body {
 }
 
 ::selection {
-  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
   color: var(--color-text-primary);
 }
 
@@ -52,7 +42,7 @@ body {
 }
 
 .section-container {
-  @apply mx-auto w-full max-w-5xl;
+  @apply mx-auto w-full max-w-6xl;
   padding-left: max(1.25rem, env(safe-area-inset-left));
   padding-right: max(1.25rem, env(safe-area-inset-right));
 }
@@ -71,41 +61,20 @@ body {
   }
 }
 
-.chapter {
-  @apply relative flex min-h-[100dvh] flex-col justify-center;
+.section-padding {
+  @apply py-16 md:py-24 lg:py-28;
 }
 
-.chapter-inner {
-  @apply mx-auto w-full max-w-5xl py-24 md:py-32;
-  padding-left: max(1.25rem, env(safe-area-inset-left));
-  padding-right: max(1.25rem, env(safe-area-inset-right));
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85;
 }
 
-@media (min-width: 768px) {
-  .chapter-inner {
-    padding-left: max(2rem, env(safe-area-inset-left));
-    padding-right: max(2rem, env(safe-area-inset-right));
-  }
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-text-primary transition-colors hover:text-primary;
 }
 
-@media (min-width: 1024px) {
-  .chapter-inner {
-    padding-left: max(2.5rem, env(safe-area-inset-left));
-    padding-right: max(2.5rem, env(safe-area-inset-right));
-  }
-}
-
-.glass-nav {
-  background: rgba(250, 250, 250, 0.72);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(17, 17, 17, 0.06);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid var(--color-border);
-  backdrop-filter: blur(12px);
+.tag {
+  @apply rounded-md border border-border bg-white px-2.5 py-1 text-xs text-text-secondary;
 }
 
 .scrollbar-hide {

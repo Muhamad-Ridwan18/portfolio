@@ -3,9 +3,8 @@ export {
   getEnabledSections,
   getNavLinks,
   getSectionConfig,
-  getSectionNumber,
-  buildCodeLines,
-  getDefaultExperienceId,
-  getProjectInitials,
+  getProjectById,
+  getFeaturedProjects,
+  getSecondaryProjects,
   siteConfig,
 } from "@/lib/portfolio";

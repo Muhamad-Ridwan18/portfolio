@@ -1,110 +1,130 @@
 "use client";
 
 import Image from "next/image";
-import { TextReveal } from "@/components/ui/text-reveal";
-import { BlurReveal } from "@/components/ui/blur-reveal";
-import { IPhoneMockup } from "@/components/ui/iphone-mockup";
-import { getPortfolio } from "@/lib/portfolio";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import {
+  getFeaturedProjects,
+  getSecondaryProjects,
+  getSectionConfig,
+} from "@/lib/portfolio";
 
 export function Projects() {
-  const { projects } = getPortfolio();
-  const featured = projects.filter((p) => p.featured);
+  const featured = getFeaturedProjects();
+  const secondary = getSecondaryProjects();
+  const section = getSectionConfig("projects");
+  const heading = section?.heading;
 
   return (
-    <div id="projects" aria-label="Selected Work">
-      {featured.map((project, index) => {
-        const mockupImage =
-          project.images?.find((img) => img.id === "mobile") ??
-          project.images?.[0];
-        const reversed = index % 2 === 1;
+    <section id="projects" className="section-padding bg-white">
+      <div className="section-container">
+        {heading && (
+          <div className="mb-12 md:mb-16">
+            <p className="mb-3 text-sm font-medium text-primary">{heading.label}</p>
+            <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+              {heading.title}
+            </h2>
+            {heading.subtitle && (
+              <p className="mt-3 max-w-xl text-text-secondary">{heading.subtitle}</p>
+            )}
+          </div>
+        )}
 
-        return (
-          <section
-            key={project.id}
-            className="chapter bg-background"
-            aria-label={project.name}
-          >
-            <div className="chapter-inner">
-              <div
-                className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-20 ${
-                  reversed ? "lg:[direction:rtl]" : ""
-                }`}
-              >
-                <div className="lg:[direction:ltr]">
-                  <BlurReveal>
-                    <p className="mb-4 text-sm text-text-muted">{project.tagline}</p>
-                  </BlurReveal>
-
-                  <TextReveal
-                    text={project.name}
-                    as="h2"
-                    delay={0.1}
-                    className="font-heading text-4xl font-semibold tracking-[-0.03em] text-text-primary md:text-5xl lg:text-6xl"
-                  />
-
-                  <BlurReveal delay={0.3}>
-                    <p className="mt-6 max-w-md text-base leading-relaxed text-text-secondary md:text-lg">
-                      {project.description}
-                    </p>
-                  </BlurReveal>
-
-                  {project.highlights && project.highlights.length > 0 && (
-                    <BlurReveal delay={0.4}>
-                      <ul className="mt-8 space-y-2">
-                        {project.highlights.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-center gap-3 text-sm text-text-secondary md:text-base"
-                          >
-                            <span className="h-1 w-1 rounded-full bg-primary" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </BlurReveal>
+        <div className="space-y-8">
+          {featured.map((project) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="overflow-hidden rounded-2xl border border-border bg-surface-muted"
+            >
+              <div className="grid lg:grid-cols-2">
+                <div className="flex flex-col justify-center p-8 md:p-10 lg:p-12">
+                  <p className="text-xs font-semibold tracking-wider text-primary uppercase">
+                    Featured
+                  </p>
+                  <h3 className="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+                    {project.name}
+                  </h3>
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-text-secondary md:text-base">
+                    {project.description}
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <span key={tech} className="tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  {project.caseStudyHref && (
+                    <Link
+                      href={project.caseStudyHref}
+                      className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-primary"
+                    >
+                      View Case Study
+                      <span aria-hidden="true">→</span>
+                    </Link>
                   )}
-
-                  <BlurReveal delay={0.5}>
-                    <div className="mt-10 flex flex-wrap gap-2">
-                      {project.stack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-full border border-border px-3.5 py-1.5 text-xs text-text-secondary md:text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </BlurReveal>
                 </div>
 
-                <motion.div
-                  className="flex justify-center lg:[direction:ltr]"
-                  initial={{ opacity: 0, y: 32, filter: "blur(12px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {project.useMockup && mockupImage ? (
-                    <IPhoneMockup src={mockupImage.src} alt={mockupImage.alt} />
-                  ) : mockupImage ? (
-                    <div className="relative aspect-[16/10] w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-surface shadow-xl shadow-black/5">
-                      <Image
-                        src={mockupImage.src}
-                        alt={mockupImage.alt}
-                        fill
-                        className="object-cover object-top"
-                        sizes="(max-width: 768px) 100vw, 512px"
-                      />
-                    </div>
-                  ) : null}
-                </motion.div>
+                <div className="relative min-h-[280px] bg-[#e8ebe9] md:min-h-[360px]">
+                  {project.coverImage && (
+                    <Image
+                      src={project.coverImage}
+                      alt={`${project.name} product mockup`}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          </section>
-        );
-      })}
-    </div>
+            </motion.article>
+          ))}
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {secondary.map((project, index) => (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: index * 0.08 }}
+                className="overflow-hidden rounded-2xl border border-border bg-white"
+              >
+                <div className="relative aspect-[16/10] bg-surface-muted">
+                  {project.coverImage && (
+                    <Image
+                      src={project.coverImage}
+                      alt={`${project.name} mockup`}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  )}
+                </div>
+                <div className="p-6 md:p-7">
+                  <h3 className="text-xl font-bold text-ink">{project.name}</h3>
+                  <p className="mt-1 text-sm text-primary">{project.tagline}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                    {project.description}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <span key={tech} className="tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

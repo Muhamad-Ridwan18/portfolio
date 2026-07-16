@@ -1,11 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
@@ -53,12 +50,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${inter.variable}`}
-    >
-      <body className="antialiased">
-        <SmoothScroll />
+    <html lang="en" className={inter.variable}>
+      <body className="font-body antialiased">
         <Navbar />
         <main className="w-full overflow-x-hidden">{children}</main>
         <Footer />
