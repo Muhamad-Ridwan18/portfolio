@@ -1,50 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowIcon, MagneticButton } from "@/components/ui";
 import { getPortfolio } from "@/lib/portfolio";
-import { FloatingParticles } from "@/components/ui/floating-particles";
 
 export function Spotlight() {
-  const { spotlight } = getPortfolio();
+  const { spotlight, site, social } = getPortfolio();
+
+  const actions = [
+    {
+      id: "email",
+      label: "Email",
+      href: `mailto:${site.email}`,
+      variant: "primary" as const,
+    },
+    {
+      id: "linkedin",
+      label: "LinkedIn",
+      href: social.linkedin,
+      variant: "outline" as const,
+      external: true,
+    },
+    {
+      id: "github",
+      label: "GitHub",
+      href: social.github,
+      variant: "outline" as const,
+      external: true,
+    },
+    {
+      id: "cv",
+      label: "Download CV",
+      href: site.cvUrl,
+      variant: "light" as const,
+      download: true,
+    },
+  ];
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
-      <FloatingParticles />
-      <div className="absolute inset-0 aurora-bg opacity-70" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-
-      <div className="section-container relative z-10">
+    <section id="spotlight" className="relative bg-[#0b1220] py-20 md:py-28">
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="gradient-border mx-auto max-w-4xl rounded-3xl p-px"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto max-w-3xl text-center"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-surface/80 px-8 py-16 text-center backdrop-blur-xl md:px-16 md:py-20">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
-            <div className="relative">
-              <p className="font-mono text-xs tracking-[0.3em] text-primary uppercase">
-                Ready to collaborate?
-              </p>
-              <h2 className="mt-6 font-heading text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-                <span className="gradient-text">{spotlight.title}</span>
-              </h2>
-              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-secondary md:text-lg">
-                {spotlight.subtitle}
-              </p>
-              <div className="mt-10 flex justify-center">
-                <MagneticButton
-                  href={spotlight.ctaHref}
-                  variant="primary"
-                  icon={<ArrowIcon />}
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+            {spotlight.title}
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-slate-400">
+            {spotlight.subtitle}
+          </p>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+            {actions.map((action) => {
+              const className =
+                action.variant === "primary"
+                  ? "bg-primary text-white hover:bg-primary/90"
+                  : action.variant === "light"
+                    ? "bg-white text-slate-900 hover:bg-slate-100"
+                    : "border border-white/20 bg-transparent text-white hover:border-white/40 hover:bg-white/5";
+
+              return (
+                <a
+                  key={action.id}
+                  href={action.href}
+                  {...(action.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  {...(action.download ? { download: true } : {})}
+                  className={`inline-flex min-w-[140px] items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium transition-all ${className}`}
                 >
-                  {spotlight.ctaLabel}
-                </MagneticButton>
-              </div>
-            </div>
+                  {action.label}
+                </a>
+              );
+            })}
           </div>
         </motion.div>
       </div>

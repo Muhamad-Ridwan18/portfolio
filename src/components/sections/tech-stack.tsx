@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { getPortfolio, getSectionConfig, getSectionNumber } from "@/lib/portfolio";
@@ -29,34 +28,27 @@ export function TechStack() {
           </FadeUp>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {techStack.map((category, catIndex) => (
             <FadeUp key={category.category} delay={catIndex * 0.06}>
-              <CardSpotlight className="glass-card group h-full rounded-2xl p-6 transition-all duration-300 hover:border-primary/20">
-                <div className="mb-5 flex items-center gap-3">
+              <CardSpotlight className="glass-card group h-full rounded-2xl p-5 transition-all duration-300 hover:border-primary/20">
+                <div className="mb-4 flex items-center gap-2.5">
                   <div
                     className="h-2 w-2 rounded-full"
-                    style={{
-                      background: category.color,
-                      boxShadow: `0 0 12px ${category.color}60`,
-                    }}
+                    style={{ background: category.color }}
                   />
-                  <h3 className="font-heading text-sm font-semibold tracking-wider text-text-primary uppercase">
+                  <h3 className="font-heading text-sm font-semibold tracking-wide text-text-primary">
                     {category.category}
                   </h3>
                 </div>
-                <ul className="flex flex-wrap gap-2">
-                  {category.items.map((item, i) => (
-                    <motion.li
+                <ul className="flex flex-col gap-2">
+                  {category.items.map((item) => (
+                    <li
                       key={item}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: catIndex * 0.06 + i * 0.04 }}
-                      className="rounded-lg border border-border bg-background/60 px-3 py-1.5 font-mono text-sm text-text-secondary transition-all duration-300 hover:border-primary/30 hover:text-text-primary"
+                      className="font-mono text-sm text-text-secondary transition-colors group-hover:text-text-primary"
                     >
                       {item}
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </CardSpotlight>

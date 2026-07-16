@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 interface MagneticButtonProps {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "dark";
   external?: boolean;
   download?: boolean;
   className?: string;
@@ -27,11 +27,13 @@ export function MagneticButton({
 
   const variants = {
     primary:
-      "btn-shine bg-gradient-to-r from-primary via-indigo-500 to-primary/80 text-white border border-primary/30 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:brightness-110",
+      "bg-primary text-white border border-primary shadow-sm hover:bg-primary/90",
     secondary:
-      "glass-card text-text-primary hover:border-primary/30 hover:bg-surface-elevated",
+      "bg-white text-text-primary border border-border hover:border-primary/40 hover:bg-emerald-50/50",
     ghost:
-      "bg-transparent text-text-secondary border border-border hover:text-text-primary hover:border-primary/40 hover:bg-white/[0.02]",
+      "bg-transparent text-text-secondary border border-border hover:text-text-primary hover:border-border-hover hover:bg-surface-elevated",
+    dark:
+      "bg-slate-900 text-white border border-slate-900 hover:bg-slate-800",
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {

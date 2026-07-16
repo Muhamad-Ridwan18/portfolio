@@ -41,9 +41,9 @@ export function Journey() {
                     </span>
                     <motion.div
                       whileHover={{ scale: 1.15 }}
-                      className="relative z-10 mt-3 flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary/50 bg-surface shadow-lg shadow-primary/10"
+                      className="relative z-10 mt-3 flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary/30 bg-surface shadow-sm"
                     >
-                      <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary to-secondary" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-primary" />
                     </motion.div>
                     <span className="mt-4 max-w-[110px] text-center text-sm leading-snug text-text-secondary">
                       {step.label}

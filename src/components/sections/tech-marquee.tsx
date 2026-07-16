@@ -9,7 +9,7 @@ export function TechMarquee() {
 
   return (
     <section
-      className="marquee-pause relative overflow-hidden border-y border-border bg-surface/50 py-5"
+      className="marquee-pause relative overflow-hidden border-y border-border bg-surface-elevated py-5"
       aria-label="Technologies"
     >
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent sm:w-20" />
@@ -21,7 +21,7 @@ export function TechMarquee() {
             key={`a-${item}-${i}`}
             className="inline-flex items-center gap-2.5 font-mono text-xs text-text-secondary transition-colors hover:text-text-primary sm:text-sm"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-primary to-secondary shadow-sm shadow-primary/40" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {item}
           </span>
         ))}
@@ -32,7 +32,7 @@ export function TechMarquee() {
             key={`b-${item}-${i}`}
             className="inline-flex items-center gap-2.5 font-mono text-xs text-text-muted sm:text-sm"
           >
-            <span className="h-1 w-1 rounded-full bg-secondary/60" />
+            <span className="h-1 w-1 rounded-full bg-text-muted" />
             {item}
           </span>
         ))}

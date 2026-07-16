@@ -70,7 +70,7 @@ export function ProjectModal({
         >
           <motion.button
             type="button"
-            className="absolute inset-0 bg-background/90 backdrop-blur-2xl"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -79,7 +79,7 @@ export function ProjectModal({
           />
 
           <motion.div
-            className="relative z-10 flex w-full max-w-6xl flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-2xl shadow-black/60"
+            className="relative z-10 flex w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl"
             initial={{ opacity: 0, scale: 0.88, y: 40, rotateX: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 24 }}
@@ -126,7 +126,7 @@ export function ProjectModal({
               </button>
             </div>
 
-            <div className="relative bg-background/50">
+            <div className="relative bg-surface-elevated">
               <div className="relative aspect-[16/10] w-full overflow-hidden md:aspect-[16/9]">
                 <AnimatePresence mode="wait">
                   <motion.div

@@ -26,11 +26,11 @@ export function RotatingText({ phrases, className = "" }: RotatingTextProps) {
       <AnimatePresence mode="wait">
         <motion.span
           key={phrases[index]}
-          initial={{ y: 24, opacity: 0, filter: "blur(8px)" }}
-          animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: -24, opacity: 0, filter: "blur(8px)" }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute left-0 bg-gradient-to-r from-secondary via-primary to-secondary bg-[length:200%_auto] bg-clip-text font-heading font-semibold text-transparent animate-shimmer"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -16, opacity: 0 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute left-0 font-medium text-primary"
         >
           {phrases[index]}
         </motion.span>

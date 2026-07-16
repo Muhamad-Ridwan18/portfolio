@@ -24,12 +24,14 @@ export const portfolio: Portfolio = {
   },
 
   profile: {
-    firstName: "Ridwan",
-    displayName: "Ridwan",
-    role: "Senior Software Engineer",
+    firstName: "Muhamad",
+    lastName: "Ridwan",
+    displayName: "Muhamad Ridwan",
+    role: "Software Engineer",
     roleHighlight: "Software Engineer",
+    focusAreas: "Backend • Mobile • Cloud",
     tagline:
-      "Building reliable software — from backend architecture to production deployment.",
+      "Building reliable software — from backend architecture to production deployment. Focused on scalable systems that create real impact for users.",
     greeting: "Hello, I'm",
     available: true,
     availabilityText: "Available for opportunities",
@@ -54,9 +56,10 @@ export const portfolio: Portfolio = {
       "End-to-End Products",
     ],
     stats: [
-      { label: "Years Experience", value: "4+" },
-      { label: "Projects Shipped", value: "5+" },
-      { label: "Tech Domains", value: "3+" },
+      { label: "Years Coding", value: "4+", icon: "code" },
+      { label: "Projects", value: "10+", icon: "folder" },
+      { label: "Users Impacted", value: "100k+", icon: "users" },
+      { label: "Role", value: "Fullstack", icon: "layers" },
     ],
   },
 
@@ -67,53 +70,54 @@ export const portfolio: Portfolio = {
 
   sections: [
     { id: "hero", enabled: true },
-    { id: "marquee", enabled: true },
+    { id: "marquee", enabled: false },
     {
       id: "about",
       enabled: true,
       navLabel: "About",
       heading: {
         label: "About",
-        title: "Who I Am",
-        subtitle: "Engineer yang membangun produk digital dari nol hingga production.",
+        title: "Building solutions that create real impact",
+        subtitle:
+          "Engineer yang membangun produk digital dari nol hingga production — scalable, maintainable, dan berdampak nyata.",
       },
     },
     {
-      id: "experience",
+      id: "tech-stack",
       enabled: true,
-      navLabel: "Experience",
-      className: "section-padding bg-surface/20 section-glow",
+      className: "section-padding section-muted section-glow",
       heading: {
-        label: "Career",
-        title: "Experience",
-        subtitle: "My professional journey in software engineering.",
+        label: "Stack",
+        title: "Technologies I work with",
+        subtitle: "Tools and platforms I use to ship reliable software.",
       },
     },
     {
       id: "projects",
       enabled: true,
       navLabel: "Projects",
+      className: "section-padding section-glow",
       heading: {
         label: "Work",
-        title: "Featured Projects",
+        title: "Some things I've built",
         subtitle:
           "Selected work spanning healthcare systems, marketplaces, and enterprise applications.",
       },
     },
     {
-      id: "tech-stack",
+      id: "experience",
       enabled: true,
-      navLabel: "Tech Stack",
-      className: "section-padding bg-surface/20 section-glow",
+      navLabel: "Experience",
+      className: "section-padding section-muted section-glow",
       heading: {
-        label: "Tools",
-        title: "Tech Stack",
-        subtitle: "Technologies I work with to build reliable software.",
+        label: "Career",
+        title: "Professional Journey",
+        subtitle: "My path in software engineering — from intern to senior.",
       },
     },
     {
       id: "skills",
-      enabled: true,
+      enabled: false,
       navLabel: "Skills",
       heading: {
         label: "Expertise",
@@ -123,9 +127,9 @@ export const portfolio: Portfolio = {
     },
     {
       id: "impact",
-      enabled: true,
+      enabled: false,
       navLabel: "Impact",
-      className: "section-padding bg-surface/20 section-glow",
+      className: "section-padding section-muted section-glow",
       heading: {
         label: "Impact",
         title: "Engineering Impact",
@@ -135,7 +139,7 @@ export const portfolio: Portfolio = {
     },
     {
       id: "journey",
-      enabled: true,
+      enabled: false,
       navLabel: "Journey",
       heading: {
         label: "Timeline",
@@ -143,12 +147,12 @@ export const portfolio: Portfolio = {
         subtitle: "From intern to senior engineer — building expertise across domains.",
       },
     },
-    { id: "spotlight", enabled: true },
+    { id: "spotlight", enabled: true, navLabel: "Contact" },
     {
       id: "contact",
-      enabled: true,
+      enabled: false,
       navLabel: "Contact",
-      className: "section-padding bg-surface/20 section-glow",
+      className: "section-padding section-glow",
       heading: {
         label: "Contact",
         title: "Get In Touch",
@@ -159,10 +163,11 @@ export const portfolio: Portfolio = {
   ],
 
   spotlight: {
-    title: "Let's build something impactful.",
-    subtitle: "From architecture to production — I help teams ship reliable software that users actually love.",
-    ctaLabel: "Start a Conversation",
-    ctaHref: "#contact",
+    title: "Let's build something great together.",
+    subtitle:
+      "From architecture to production — I help teams ship reliable software that users actually love.",
+    ctaLabel: "Email Me",
+    ctaHref: "mailto:muhamad.ridwan@example.com",
   },
 
   about: {
@@ -179,35 +184,8 @@ export const portfolio: Portfolio = {
 
   experience: [
     {
-      id: "intern",
-      year: "2022",
-      title: "Junior Programmer Intern",
-      company: "First Professional Role",
-      description:
-        "Started my professional journey learning software development fundamentals, collaborating with senior developers, and contributing to real-world projects.",
-      highlights: [
-        "Learned professional development workflows",
-        "Contributed to bug fixes and feature development",
-        "Gained exposure to production codebases",
-      ],
-    },
-    {
-      id: "junior",
-      year: "2025",
-      title: "Junior Software Engineer",
-      company: "Healthcare & Enterprise Systems",
-      description:
-        "Developed and maintained healthcare information systems and electronic medical records, working on backend APIs, integrations, and production deployments.",
-      highlights: [
-        "Backend development with Laravel",
-        "Healthcare system integrations",
-        "API development and maintenance",
-        "Production deployment and monitoring",
-      ],
-    },
-    {
       id: "senior",
-      year: "2026",
+      year: "2026 — Present",
       title: "Senior Software Engineer",
       company: "End-to-End Product Development",
       description:
@@ -220,6 +198,33 @@ export const portfolio: Portfolio = {
         "Team collaboration and mentoring",
       ],
       defaultOpen: true,
+    },
+    {
+      id: "junior",
+      year: "2023 — 2025",
+      title: "Junior Software Engineer",
+      company: "Healthcare & Enterprise Systems",
+      description:
+        "Developed and maintained healthcare information systems and electronic medical records, working on backend APIs, integrations, and production deployments.",
+      highlights: [
+        "Backend development with Laravel",
+        "Healthcare system integrations",
+        "API development and maintenance",
+        "Production deployment and monitoring",
+      ],
+    },
+    {
+      id: "intern",
+      year: "2022",
+      title: "Junior Programmer Intern",
+      company: "First Professional Role",
+      description:
+        "Started my professional journey learning software development fundamentals, collaborating with senior developers, and contributing to real-world projects.",
+      highlights: [
+        "Learned professional development workflows",
+        "Contributed to bug fixes and feature development",
+        "Gained exposure to production codebases",
+      ],
     },
   ],
 
@@ -248,8 +253,8 @@ export const portfolio: Portfolio = {
         "Deployment",
         "Maintenance",
       ],
-      gradient: "from-indigo-500/20 to-cyan-500/20",
-      accent: "#4F46E5",
+      gradient: "from-emerald-500/20 to-green-500/20",
+      accent: "#16A34A",
     },
     {
       id: "klikmedis",
@@ -265,8 +270,8 @@ export const portfolio: Portfolio = {
         "BPJS Integration",
         "WhatsApp Integration",
       ],
-      gradient: "from-cyan-500/20 to-emerald-500/20",
-      accent: "#06B6D4",
+      gradient: "from-green-500/20 to-teal-500/20",
+      accent: "#059669",
     },
     {
       id: "baytgo",
@@ -283,8 +288,8 @@ export const portfolio: Portfolio = {
         "Deployment",
         "Architecture",
       ],
-      gradient: "from-violet-500/20 to-indigo-500/20",
-      accent: "#8B5CF6",
+      gradient: "from-lime-500/20 to-emerald-500/20",
+      accent: "#22C55E",
     },
     {
       id: "webyouneed",
@@ -295,8 +300,8 @@ export const portfolio: Portfolio = {
       year: "2024",
       stack: ["Laravel", "React", "MySQL", "Nginx"],
       contributions: ["Backend", "Frontend", "Deployment"],
-      gradient: "from-blue-500/20 to-indigo-500/20",
-      accent: "#3B82F6",
+      gradient: "from-emerald-500/20 to-cyan-500/20",
+      accent: "#0D9488",
     },
     {
       id: "daksa",
@@ -307,18 +312,17 @@ export const portfolio: Portfolio = {
       year: "2023",
       stack: ["Laravel", "MySQL", "Nginx"],
       contributions: ["Full Stack Development", "Server Deployment"],
-      gradient: "from-emerald-500/20 to-cyan-500/20",
-      accent: "#10B981",
+      gradient: "from-green-500/20 to-emerald-500/20",
+      accent: "#16A34A",
     },
   ],
 
   techStack: [
-    { category: "Backend", color: "#4F46E5", items: ["Laravel", "Golang", "PHP"] },
-    { category: "Frontend", color: "#06B6D4", items: ["React", "Next.js", "HTML", "CSS", "JavaScript"] },
-    { category: "Mobile", color: "#8B5CF6", items: ["React Native"] },
-    { category: "Database", color: "#10B981", items: ["MySQL", "PostgreSQL"] },
-    { category: "Infrastructure", color: "#F59E0B", items: ["Linux", "Nginx", "Docker", "Git", "Redis"] },
-    { category: "Design", color: "#EC4899", items: ["Figma"] },
+    { category: "Backend", color: "#16A34A", items: ["Laravel", "Golang", "Node.js", "PHP"] },
+    { category: "Mobile", color: "#22C55E", items: ["React Native"] },
+    { category: "Frontend", color: "#059669", items: ["React", "Next.js", "TypeScript"] },
+    { category: "Database", color: "#0D9488", items: ["MySQL", "PostgreSQL", "Redis"] },
+    { category: "DevOps", color: "#65A30D", items: ["Docker", "Nginx", "Linux", "Git"] },
   ],
 
   skills: [
@@ -376,10 +380,10 @@ export const portfolio: Portfolio = {
   },
 
   footer: {
-    brandSuffix: ".",
-    tagline: "Senior Software Engineer",
+    brandSuffix: "",
+    tagline: "Software Engineer",
     builtWith: ["Next.js", "TailwindCSS", "Framer Motion"],
-    madeBy: "Ridwan",
+    madeBy: "Muhamad Ridwan",
   },
 
   social: {

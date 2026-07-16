@@ -37,45 +37,41 @@ export function Experience() {
           </FadeUp>
         )}
 
-        <div className="relative mx-auto max-w-3xl">
+        <div className="relative mx-auto max-w-2xl">
           <div
-            className="absolute top-0 bottom-0 left-6 w-px bg-gradient-to-b from-primary/50 via-secondary/30 to-transparent md:left-1/2 md:-translate-x-px"
+            className="absolute top-2 bottom-2 left-[7px] w-px bg-gradient-to-b from-primary via-primary/30 to-transparent"
             aria-hidden="true"
           />
 
           {experience.map((item, index) => {
             const isActive = activeId === item.id;
             return (
-              <FadeUp key={item.id} delay={index * 0.1}>
-                <div className="relative mb-10 last:mb-0">
+              <FadeUp key={item.id} delay={index * 0.08}>
+                <div className="relative mb-8 last:mb-0 pl-10">
                   <div
-                    className={`absolute left-6 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 transition-all duration-300 md:left-1/2 ${
+                    className={`absolute left-0 top-1.5 z-10 h-4 w-4 rounded-full border-2 transition-all duration-300 ${
                       isActive
-                        ? "border-primary bg-primary shadow-lg shadow-primary/40"
-                        : "border-border bg-background"
+                        ? "border-primary bg-primary"
+                        : "border-primary/40 bg-white"
                     }`}
                   />
 
                   <button
                     type="button"
-                    className={`ml-14 w-full rounded-2xl border p-6 text-left transition-all duration-300 md:ml-0 md:w-[calc(50%-2.5rem)] ${
-                      index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
-                    } ${
+                    className={`w-full rounded-2xl border p-5 text-left transition-all duration-300 sm:p-6 ${
                       isActive
-                        ? "glass-card border-primary/30 glow-primary"
-                        : "border-border bg-surface/40 hover:border-primary/20 hover:bg-surface/60"
+                        ? "glass-card border-primary/25 shadow-sm"
+                        : "border-border bg-white hover:border-primary/20 hover:shadow-sm"
                     }`}
-                    onClick={() =>
-                      setActiveId(isActive ? null : item.id)
-                    }
+                    onClick={() => setActiveId(isActive ? null : item.id)}
                     aria-expanded={isActive}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <span className="font-mono text-sm font-medium text-primary">
+                        <span className="font-mono text-xs font-medium text-primary sm:text-sm">
                           {item.year}
                         </span>
-                        <h3 className="mt-1 font-heading text-lg font-semibold text-text-primary">
+                        <h3 className="mt-1 font-heading text-base font-semibold text-text-primary sm:text-lg">
                           {item.title}
                         </h3>
                         <p className="mt-0.5 text-sm text-text-secondary">
@@ -111,7 +107,7 @@ export function Experience() {
                                 key={highlight}
                                 className="flex items-start gap-3 text-sm text-text-secondary"
                               >
-                                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-secondary" />
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                                 {highlight}
                               </li>
                             ))}

@@ -4,8 +4,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { MouseGlow } from "@/components/ui/mouse-glow";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
@@ -70,10 +68,8 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="noise-bg antialiased">
-        <CustomCursor />
+      <body className="antialiased">
         <ScrollProgress />
-        <MouseGlow />
         <Navbar />
         <main className="w-full overflow-x-hidden">{children}</main>
         <Footer />

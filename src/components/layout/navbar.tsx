@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getNavLinks } from "@/lib/portfolio";
+import { getNavLinks, getPortfolio } from "@/lib/portfolio";
 
 export function Navbar() {
   const navLinks = getNavLinks();
+  const { site } = getPortfolio();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -40,28 +41,28 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 md:top-1.5 md:px-4">
+    <header className="fixed inset-x-0 top-0 z-50">
       <nav
-        className={`flex h-14 w-full items-center justify-between px-4 transition-all duration-300 md:section-container md:rounded-2xl md:border md:px-4 ${
+        className={`flex h-16 w-full items-center justify-between px-4 transition-all duration-300 md:section-container md:px-6 ${
           scrolled
-            ? "border-border bg-surface/95 shadow-sm backdrop-blur-xl md:shadow-lg md:shadow-black/10"
-            : "border-b border-border/60 bg-surface/90 backdrop-blur-lg md:border-transparent md:bg-surface/40"
+            ? "border-b border-border bg-white/95 shadow-sm backdrop-blur-xl"
+            : "border-b border-transparent bg-white/80 backdrop-blur-md"
         }`}
       >
         <Link
           href="#"
-          className="group flex items-center gap-2 font-heading text-lg font-bold"
+          className="group flex items-center gap-2.5 font-heading text-base font-bold"
           aria-label="Back to top"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-xs font-bold text-white">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white">
             MR
           </span>
-          <span className="text-text-primary sm:inline">
-            Ridwan<span className="text-primary">.</span>
+          <span className="hidden text-text-primary sm:inline">
+            Muhamad Ridwan
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((link) => {
             const id = link.href.replace("#", "");
             const isActive = activeSection === id;
@@ -78,7 +79,7 @@ export function Navbar() {
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 rounded-lg bg-white/[0.06]"
+                      className="absolute inset-0 rounded-lg bg-emerald-50"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -91,15 +92,25 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="#contact"
-            className="hidden rounded-xl bg-gradient-to-r from-primary to-primary/80 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-primary/20 transition-all hover:brightness-110 md:inline-flex"
+            href={site.cvUrl}
+            download
+            className="hidden items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition-all hover:bg-slate-800 md:inline-flex"
           >
-            Let&apos;s Talk
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Download CV
           </Link>
 
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface-elevated/80 md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -123,14 +134,14 @@ export function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="border-b border-border bg-surface/98 px-4 py-3 backdrop-blur-xl md:hidden"
+          className="border-b border-border bg-white px-4 py-3 shadow-sm lg:hidden"
         >
           <ul className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block rounded-xl px-3 py-3 text-sm text-text-secondary transition-colors hover:bg-white/[0.04] hover:text-text-primary"
+                  className="block rounded-xl px-3 py-3 text-sm text-text-secondary transition-colors hover:bg-emerald-50 hover:text-text-primary"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -139,11 +150,12 @@ export function Navbar() {
             ))}
             <li className="mt-2 border-t border-border pt-2">
               <Link
-                href="#contact"
-                className="block rounded-xl bg-primary/10 px-3 py-3 text-center text-sm font-medium text-primary"
+                href={site.cvUrl}
+                download
+                className="block rounded-xl bg-slate-900 px-3 py-3 text-center text-sm font-medium text-white"
                 onClick={() => setMobileOpen(false)}
               >
-                Let&apos;s Talk
+                Download CV
               </Link>
             </li>
           </ul>

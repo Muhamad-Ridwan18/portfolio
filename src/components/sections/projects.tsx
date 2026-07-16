@@ -50,7 +50,7 @@ export function Projects() {
                 key={`featured-${project.id}`}
                 type="button"
                 onClick={() => openGallery(project, 0)}
-                className="group relative w-64 shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-surface text-left transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 md:w-72"
+                className="group relative w-64 shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-surface text-left shadow-sm transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-md md:w-72"
               >
                 {project.images[0] && (
                   <div className="relative h-36 overflow-hidden">

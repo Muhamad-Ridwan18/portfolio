@@ -19,6 +19,7 @@ interface SectionHeadingProps {
   subtitle?: string;
   align?: "left" | "center";
   number?: string;
+  className?: string;
 }
 
 export function SectionHeading({
@@ -27,16 +28,17 @@ export function SectionHeading({
   subtitle,
   align = "left",
   number,
+  className = "",
 }: SectionHeadingProps) {
   const centered = align === "center";
 
   return (
-    <div className={`mb-12 md:mb-16 ${centered ? "text-center" : ""}`}>
+    <div className={`mb-12 md:mb-16 ${centered ? "text-center" : ""} ${className}`}>
       <div
         className={`mb-6 flex items-end gap-4 ${centered ? "justify-center" : ""}`}
       >
         {number && (
-          <span className="font-heading text-5xl font-bold leading-none text-surface-elevated md:text-6xl">
+          <span className="font-heading text-5xl font-bold leading-none text-emerald-50 md:text-6xl">
             {number}
           </span>
         )}

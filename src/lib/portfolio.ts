@@ -73,9 +73,9 @@ export function getSectionConfig(
 export function getSectionNumber(id: SectionConfig["id"]): string | undefined {
   const numbers: Partial<Record<SectionConfig["id"], string>> = {
     about: "01",
-    experience: "02",
+    "tech-stack": "02",
     projects: "03",
-    "tech-stack": "04",
+    experience: "04",
     skills: "05",
     impact: "06",
     journey: "07",
@@ -169,21 +169,21 @@ export function buildCodeLines(): CodeLine[] {
     .join(", ");
 
   const lines: CodeLine[] = [
-    { indent: 0, content: `const ${codeSnippet.variableName} = {`, color: "text-secondary" },
-    { indent: 1, content: `name: "${displayName}",`, color: "text-text-primary" },
-    { indent: 1, content: `role: "${role}",`, color: "text-text-primary" },
-    { indent: 1, content: "skills: [", color: "text-text-primary" },
-    { indent: 2, content: `${line1}${skills.length > half ? "," : ""}`, color: "text-success" },
+    { indent: 0, content: `const ${codeSnippet.variableName} = {`, color: "text-sky-300" },
+    { indent: 1, content: `name: "${displayName}",`, color: "text-slate-100" },
+    { indent: 1, content: `role: "${role}",`, color: "text-slate-100" },
+    { indent: 1, content: "skills: [", color: "text-slate-100" },
+    { indent: 2, content: `${line1}${skills.length > half ? "," : ""}`, color: "text-emerald-400" },
   ];
 
   if (line2) {
-    lines.push({ indent: 2, content: line2, color: "text-success" });
+    lines.push({ indent: 2, content: line2, color: "text-emerald-400" });
   }
 
   lines.push(
-    { indent: 1, content: "],", color: "text-text-primary" },
-    { indent: 1, content: codeSnippet.buildLine, color: "text-primary" },
-    { indent: 0, content: "};", color: "text-secondary" }
+    { indent: 1, content: "],", color: "text-slate-100" },
+    { indent: 1, content: codeSnippet.buildLine, color: "text-green-400" },
+    { indent: 0, content: "};", color: "text-sky-300" }
   );
 
   return lines;

@@ -12,7 +12,7 @@ export type SectionId =
   | "contact";
 
 export type ContactIcon = "email" | "linkedin" | "github" | "instagram" | "twitter" | "website";
-export type ButtonVariant = "primary" | "secondary" | "ghost";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "dark";
 
 export interface SectionHeading {
   label: string;
@@ -50,9 +50,11 @@ export interface HeroCta {
 
 export interface Profile {
   firstName: string;
+  lastName?: string;
   displayName: string;
   role: string;
   roleHighlight?: string;
+  focusAreas?: string;
   tagline: string;
   greeting: string;
   available: boolean;
@@ -66,7 +68,7 @@ export interface Profile {
   socialLinks: SocialLink[];
   ctas: HeroCta[];
   rotatingPhrases: string[];
-  stats: { label: string; value: string }[];
+  stats: { label: string; value: string; icon?: string }[];
 }
 
 export interface SectionConfig {
