@@ -35,7 +35,7 @@ export const portfolio: Portfolio = {
     availabilityText: "Available for opportunities",
     socialLinks: [
       { id: "github", label: "GitHub", href: "https://github.com/Muhamad-Ridwan18" },
-      { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com/in/muhamadridwan" },
+      { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/muhridwan181203/" },
     ],
     ctas: [
       {
@@ -338,7 +338,7 @@ export const portfolio: Portfolio = {
 
   social: {
     github: "https://github.com/Muhamad-Ridwan18",
-    linkedin: "https://linkedin.com/in/muhamadridwan",
-    instagram: "https://instagram.com/muhamadridwan",
+    linkedin: "https://www.linkedin.com/in/muhridwan181203/",
+    instagram: "https://www.instagram.com/mrdwn_18/",
   },
 };
