@@ -1,28 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { BackToTop } from "@/components/ui/back-to-top";
+import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -66,14 +55,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${inter.variable}`}
     >
       <body className="antialiased">
-        <ScrollProgress />
+        <SmoothScroll />
         <Navbar />
         <main className="w-full overflow-x-hidden">{children}</main>
         <Footer />
-        <BackToTop />
         <Analytics />
       </body>
     </html>

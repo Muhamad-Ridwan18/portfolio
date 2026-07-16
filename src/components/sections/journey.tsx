@@ -1,67 +1,45 @@
 "use client";
 
+import { BlurReveal } from "@/components/ui/blur-reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { getPortfolio } from "@/lib/portfolio";
 import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/ui";
-import { getPortfolio, getSectionConfig, getSectionNumber } from "@/lib/portfolio";
-import { AnimatedSection, FadeUp } from "@/lib/animations";
 
 export function Journey() {
   const { journey } = getPortfolio();
-  const section = getSectionConfig("journey");
-  const heading = section?.heading;
 
   return (
-    <AnimatedSection
-      id="journey"
-      className={section?.className ?? "section-padding section-glow section-alt"}
-    >
-      <div className="section-container">
-        {heading && (
-          <FadeUp>
-            <SectionHeading
-              number={getSectionNumber("journey")}
-              label={heading.label}
-              title={heading.title}
-              subtitle={heading.subtitle}
-              align={heading.align}
-            />
-          </FadeUp>
-        )}
+    <section id="journey" className="chapter bg-background" aria-label="Journey">
+      <div className="chapter-inner">
+        <TextReveal
+          text="The journey so far."
+          as="h2"
+          className="mb-16 font-heading text-3xl font-semibold tracking-[-0.02em] text-text-primary md:text-4xl"
+        />
 
-        <div className="mobile-bleed relative overflow-x-auto pb-4">
-          <div className="absolute top-[3.25rem] right-8 left-8 hidden h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent md:block" />
-
-          <div className="flex min-w-max items-start gap-0 px-2">
-            {journey.map((step, index) => (
-              <FadeUp key={`${step.year}-${step.label}-${index}`} delay={index * 0.07}>
-                <div className="flex items-start">
-                  <div className="flex w-28 flex-col items-center md:w-36">
-                    <span className="font-mono text-xs text-primary">
-                      {step.year}
-                    </span>
-                    <motion.div
-                      whileHover={{ scale: 1.15 }}
-                      className="relative z-10 mt-3 flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary/30 bg-surface shadow-sm"
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-                    </motion.div>
-                    <span className="mt-4 max-w-[110px] text-center text-sm leading-snug text-text-secondary">
-                      {step.label}
-                    </span>
-                  </div>
-                  {index < journey.length - 1 && (
-                    <div className="mt-[3.25rem] flex items-center">
-                      <div className="h-px w-8 bg-gradient-to-r from-primary/40 to-secondary/40 md:w-12" />
-                      <span className="text-text-muted/40">→</span>
-                      <div className="h-px w-8 bg-gradient-to-r from-secondary/40 to-primary/40 md:w-12" />
-                    </div>
-                  )}
+        <div className="mx-auto max-w-2xl space-y-0">
+          {journey.map((step, index) => (
+            <BlurReveal key={step.year} delay={index * 0.1}>
+              <div className="group relative flex gap-8 border-t border-border py-10 first:border-t-0 first:pt-0">
+                <span className="w-16 shrink-0 font-heading text-lg font-medium text-text-muted md:w-20 md:text-xl">
+                  {step.year}
+                </span>
+                <div className="flex-1">
+                  <motion.p
+                    className="font-heading text-xl font-medium text-text-primary md:text-2xl"
+                    initial={{ opacity: 0, x: 12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 + index * 0.1, duration: 0.6 }}
+                  >
+                    {step.description}
+                  </motion.p>
                 </div>
-              </FadeUp>
-            ))}
-          </div>
+              </div>
+            </BlurReveal>
+          ))}
         </div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

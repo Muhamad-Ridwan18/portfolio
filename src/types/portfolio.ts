@@ -8,6 +8,7 @@ export type SectionId =
   | "skills"
   | "impact"
   | "journey"
+  | "how-i-build"
   | "spotlight"
   | "contact";
 
@@ -55,6 +56,7 @@ export interface Profile {
   role: string;
   roleHighlight?: string;
   focusAreas?: string;
+  headline: string;
   tagline: string;
   greeting: string;
   available: boolean;
@@ -102,6 +104,19 @@ export interface ExperienceItem {
 export interface JourneyStep {
   year: string;
   label: string;
+  description: string;
+}
+
+export interface ProcessStep {
+  step: number;
+  title: string;
+}
+
+export interface LaunchImpact {
+  value: number;
+  suffix: string;
+  label: string;
+  domains: string[];
 }
 
 export interface ProjectImage {
@@ -119,8 +134,11 @@ export interface Project {
   year: string;
   stack: string[];
   contributions: string[];
+  highlights?: string[];
   gradient: string;
   accent: string;
+  featured?: boolean;
+  useMockup?: boolean;
   initials?: string;
   images?: ProjectImage[];
   url?: string;
@@ -179,6 +197,8 @@ export interface Portfolio {
   techStack: TechCategory[];
   skills: string[];
   impact: ImpactStat[];
+  launchImpact: LaunchImpact;
+  process: ProcessStep[];
   contact: ContactContent;
   footer: FooterContent;
   spotlight: SpotlightContent;

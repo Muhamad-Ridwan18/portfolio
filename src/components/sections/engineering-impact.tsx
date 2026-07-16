@@ -1,54 +1,58 @@
-import { AnimatedCounter, SectionHeading } from "@/components/ui";
-import { CardSpotlight } from "@/components/ui/card-spotlight";
-import { getPortfolio, getSectionConfig, getSectionNumber } from "@/lib/portfolio";
-import { AnimatedSection, FadeUp } from "@/lib/animations";
+"use client";
+
+import { AnimatedCounter } from "@/components/ui";
+import { BlurReveal } from "@/components/ui/blur-reveal";
+import { getPortfolio } from "@/lib/portfolio";
+import { motion } from "framer-motion";
 
 export function EngineeringImpact() {
-  const { impact } = getPortfolio();
-  const section = getSectionConfig("impact");
-  const heading = section?.heading;
+  const { launchImpact } = getPortfolio();
 
   return (
-    <AnimatedSection
-      id="impact"
-      className={section?.className ?? "section-padding section-glow"}
-    >
-      <div className="section-container">
-        {heading && (
-          <FadeUp>
-            <SectionHeading
-              number={getSectionNumber("impact")}
-              label={heading.label}
-              title={heading.title}
-              subtitle={heading.subtitle}
-              align={heading.align}
+    <section id="impact" className="chapter bg-background" aria-label="Impact">
+      <div className="chapter-inner flex flex-col items-center justify-center text-center">
+        <BlurReveal>
+          <p className="font-heading text-[clamp(4rem,15vw,10rem)] font-semibold leading-none tracking-[-0.04em] text-text-primary">
+            <AnimatedCounter
+              id="launch-impact-counter"
+              value={launchImpact.value}
+              suffix={launchImpact.suffix}
             />
-          </FadeUp>
-        )}
+          </p>
+          <p className="mt-4 text-lg text-text-secondary md:text-xl">
+            {launchImpact.label}
+          </p>
+        </BlurReveal>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {impact.map((stat, index) => (
-            <FadeUp key={stat.id} delay={index * 0.08}>
-              <div className="gradient-border group rounded-2xl p-px">
-                <CardSpotlight className="glass-card h-full rounded-2xl p-8 text-center transition-all duration-300 group-hover:border-primary/20">
-                  <p className="font-heading text-4xl font-bold md:text-5xl">
-                    <span className="gradient-text">
-                      <AnimatedCounter
-                        id={`counter-${stat.id}`}
-                        value={stat.value}
-                        suffix={stat.suffix ?? "+"}
-                      />
-                    </span>
-                  </p>
-                  <p className="mt-3 text-sm text-text-secondary">
-                    {stat.label}
-                  </p>
-                </CardSpotlight>
-              </div>
-            </FadeUp>
+        <motion.div
+          className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:gap-x-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
+          }}
+        >
+          {launchImpact.domains.map((domain) => (
+            <motion.span
+              key={domain}
+              variants={{
+                hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              className="font-heading text-xl font-medium text-text-primary md:text-2xl"
+            >
+              {domain}
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }
